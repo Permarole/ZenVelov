@@ -1,0 +1,47 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+
+}
+
+.loginForm {
+    width: 70%;
+    margin: 1.125em auto;
+}
+
+.loginTitle {
+    font-size: 24pt;
+    font-weight: 500;
+    color: #505050;
+}
+
+input {
+    background-color: #EDEDED;
+    height: 40px;
+    padding-left: 20px;
+    width: 100%;
+
+}
+
+label {
+    width: 100%;
+    text-align: left;
+    display: inline;
+    margin-bottom: 0.5em;
+}
+
+input, button {
+    border: none;
+    border-radius: 3px;
+}
+
+
+button {
+    background-color: #EA2B2B;
+    height: 34px;
+    width: 100px;
+    color: white;
+    margin-top: 1em;
+}

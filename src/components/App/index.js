@@ -2,12 +2,15 @@ import React from 'react'
 import './style.scss'
 import zafClient from '../../zafClient'
 import Footer from '../Footer'
+import Login from '../Login'
+import Map from '../Map';
 
 const App = () => {
-  const [requester, setRequester] = React.useState(null)
+  const [requester, setRequester] = React.useState(null);
+  const [isLoggedIn, setLog] = React.useState(false);
 
   React.useEffect(async () => {
-    zafClient.invoke('resize', { height: '75px' })
+    zafClient.invoke('resize', { height: '400px' })
 
     const data = await zafClient.get('ticket.requester')
     const requester = data['ticket.requester']
@@ -16,8 +19,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <p className="Requester-name">Requesters name is {requester ? requester.name : ''}.</p>
-      <Footer />
+      {isLoggedIn ?  <Map /> : <Login isLoggedIn={isLoggedIn} setLog={setLog} />}
     </div>
   )
 }
