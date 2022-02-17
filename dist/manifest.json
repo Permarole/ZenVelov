@@ -9,7 +9,11 @@
   "private": true,
   "location": {
     "support": {
-      "ticket_sidebar": "assets/index.html"
+      "ticket_sidebar": {
+        "url": "assets/index.html",
+        "flexible": true
+      }
+
     }
   },
   "version": "1.0",
