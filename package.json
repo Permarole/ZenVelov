@@ -47,11 +47,14 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.12.1",
+		"@reduxjs/toolkit": "^1.7.2",
+		"axios": "^0.26.0",
 		"core-js": "^3.6.5",
 		"promise-polyfill": "^8.2.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
-		"regenerator-runtime": "^0.13.7"
+		"react-redux": "^7.2.6",
+		"regenerator-runtime": "^0.13.9"
 	},
 	"jest": {
 		"moduleNameMapper": {
