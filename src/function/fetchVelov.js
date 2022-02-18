@@ -1,32 +1,24 @@
 import React from "react";
-import distance from "./distance"
+import distance from "./distance";
+import axios from "axios";
 
 
-export async function getStationStatus(map, stationsInfo){
-    await fetch('https://transport.data.gouv.fr/gbfs/lyon/station_status.json', {
-      method: 'GET'
-    })
-    .then((response) => (response.json()))
-    .then((stationsStatus) => (handleRelevantStations(map, stationsInfo, stationsStatus)));
-
+export async function getStationStatus(){
+    const res = await axios.get('https://transport.data.gouv.fr/gbfs/lyon/station_status.json')
+    return res.data.data.stations;
   }
 
-export async function getStationInformation(map){
-    await fetch('https://transport.data.gouv.fr/gbfs/lyon/station_information.json', {
-      method: 'GET'
-    })
-    .then((response) => (response.json()))
-    .then((stationsInfo) => getStationStatus(map,stationsInfo));
+export async function getStationInformation(){
+    const res = await axios.get('https://transport.data.gouv.fr/gbfs/lyon/station_information.json')
+    return res.data.data.stations;
   }
 
-export function handleRelevantStations (map, stationsInfo, stationsStatus){
-    const KEYRUS_COOR = [45.77872391853525, 4.859720853364637];
-    const RADIUS = 1500;
-    for (let station of stationsInfo.data.stations) {
+export function handleRelevantStations (map, stationsInfo, stationsStatus, RADIUS, KEYRUS_COOR){
+    for (let station of stationsInfo) {
       let point1 = KEYRUS_COOR;
       let point2 = [station.lat, station.lon];
       if(distance([point1, point2]) <= RADIUS){
-        for(let status of stationsStatus.data.stations){
+        for(let status of stationsStatus){
             if (status.station_id === station.station_id){
                 let velovMarker = L.marker([station.lat, station.lon]).addTo(map);
                 {station.address ?

@@ -50,9 +50,11 @@
 		"@reduxjs/toolkit": "^1.7.2",
 		"axios": "^0.26.0",
 		"core-js": "^3.6.5",
+		"leaflet": "^1.7.1",
 		"promise-polyfill": "^8.2.0",
-		"react": "^17.0.1",
-		"react-dom": "^17.0.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-leaflet": "^3.2.5",
 		"react-redux": "^7.2.6",
 		"regenerator-runtime": "^0.13.9"
 	},
