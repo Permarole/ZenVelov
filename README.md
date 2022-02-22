@@ -12,7 +12,7 @@
 
 ## How to use it
 
-Start by cloning this repository with `git clone https://github.com/Cloudhuset/Zendesk-React-App-Boilerplate.git`
+Start by cloning this repository with `git clone https://github.com/Permarole/ZenVelov.git`
 
 ### Commands
 
