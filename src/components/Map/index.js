@@ -3,63 +3,78 @@ import "./style.scss";
 import {
   getStationInformation,
   getStationStatus,
-  handleRelevantStations,
+  getRelevantStations,
 } from "../../function/fetchVelov";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  LayerGroup,
+  Circle,
+} from "react-leaflet";
 
 const Map = () => {
   const RADIUS = 1500;
   const KEYRUS_COOR = [45.77872391853525, 4.859720853364637];
+  const [refresh, setRefresh] = React.useState(false);
+  const [relevantStations, setRelevantStations] = React.useState();
+
   React.useEffect(async () => {
-    // Check if the map container exist
-    let map = L.map("map").setView(KEYRUS_COOR, 13);
-    // Add Mapbox's Streets tile layer
-    L.tileLayer(
-      "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-      {
-        attribution:
-          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: "mapbox/streets-v11",
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken:
-          "pk.eyJ1Ijoiam9uYXRoYW5rZXlydXMiLCJhIjoiY2t6cjRiaTJkMDlsbjJubW9iYXd5dGF6NyJ9.GVp-MojliqtRhe-0t-pLEQ",
-      }
-    ).addTo(map);
-
-    // Create Keyrus mark with its pop up
-    let KeyrusMarker = L.marker(KEYRUS_COOR).addTo(map);
-    KeyrusMarker.bindPopup("<b>Keyrus");
-
-    // Create range circle using the range defined in the radius const
-    var circle = L.circle(KEYRUS_COOR, {
-      color: "red",
-      fillColor: "#f03",
-      fillOpacity: 0.1,
-      radius: RADIUS,
-    }).addTo(map);
-
-    // Generate marker for every station inside the circle perimeter
     // First we gather all the stations information to get the coordinates
     const stationsInfo = await getStationInformation();
     // Then the station status to get the current state of the stations
     const stationsStatus = await getStationStatus();
     // Finaly we map both info to handle only relevant stations
-    handleRelevantStations(
-      map,
+    const newRelevantStations = getRelevantStations(
       stationsInfo,
       stationsStatus,
       RADIUS,
       KEYRUS_COOR
     );
-  }, []);
+    setRelevantStations(newRelevantStations);
+  }, [refresh]);
 
   return (
-    
     <div>
       <h2>Bienvenue sur ZenVelov</h2>
-      <div id="map"></div>
+      <div id="map">
+        <MapContainer center={KEYRUS_COOR} zoom={13}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+            url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9uYXRoYW5rZXlydXMiLCJhIjoiY2t6cjRiaTJkMDlsbjJubW9iYXd5dGF6NyJ9.GVp-MojliqtRhe-0t-pLEQ"
+            id="mapbox/streets-v11"
+            tileSize={512}
+            zoomOffset={-1}
+          />
+          <LayerGroup>
+            <Circle
+              center={KEYRUS_COOR}
+              pathOptions={{ color: "red", fillColor: "red" }}
+              radius={RADIUS}
+            />
+          </LayerGroup>
+          <Marker position={KEYRUS_COOR}>
+            <Popup>{"Keyrus"}</Popup>
+          </Marker>
+          {relevantStations &&
+            relevantStations.map((station, idx) => {
+              return (
+                <Marker
+                  key={`marker-${idx}`}
+                  position={[station.lat, station.lon]}
+                >
+                  <Popup>
+                    <b></b> {station.address} <hr></hr> Vélo(s) disponible(s):{" "}
+                    {station.num_bikes_available} <hr></hr> Dock(s)
+                    disponible(s): {station.num_docks_available}
+                  </Popup>
+                </Marker>
+              );
+            })}
+        </MapContainer>
+      </div>
+      <button onClick={() => setRefresh(!refresh)}>Refresh</button>
     </div>
   );
 };

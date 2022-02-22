@@ -1,6 +1,11 @@
-#map {
-  height: 400px;
-}
+// #map {
+//   height: 400px;
+// }
+
+.leaflet-container {
+    height: 400px;
+    width: 100%;
+  }
 
 .refresh > img {
   max-width: 100%;

@@ -13,20 +13,23 @@ export async function getStationInformation(){
     return res.data.data.stations;
   }
 
-export function handleRelevantStations (map, stationsInfo, stationsStatus, RADIUS, KEYRUS_COOR){
+export function getRelevantStations (stationsInfo, stationsStatus, RADIUS, KEYRUS_COOR){
+    const relevantStations = [];
     for (let station of stationsInfo) {
       let point1 = KEYRUS_COOR;
       let point2 = [station.lat, station.lon];
       if(distance([point1, point2]) <= RADIUS){
         for(let status of stationsStatus){
             if (status.station_id === station.station_id){
-                let velovMarker = L.marker([station.lat, station.lon]).addTo(map);
-                {station.address ?
-                velovMarker.bindPopup( `<b> ${station.address} <br>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)
-                : velovMarker.bindPopup(`<b>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)};
+                relevantStations.push({...station, ...status }) 
+                // let velovMarker = L.marker([station.lat, station.lon]).addTo(map);
+                // {station.address ?
+                // velovMarker.bindPopup( `<b> ${station.address} <hr>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)
+                // : velovMarker.bindPopup(`<b>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)};
                 break;
             }
         }   
       }
     }
+    return relevantStations;
   }
