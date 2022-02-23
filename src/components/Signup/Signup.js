@@ -33,6 +33,23 @@ export default function Signup() {
 
   return (
     <div className="signup">
+      <button className="return" onClick={() => setShowSignup(false)}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 11L9 2V7C20.953 7 22.332 16.678 22 22C21.498 19.315 21.265 15 9 15V20L2 11Z"
+            stroke="#ea2b2b"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
       <h2>Sign Up</h2>
       {error && <div className="alert">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -52,9 +69,6 @@ export default function Signup() {
           Sign Up
         </button>
       </form>
-      <button className="return btn-secondary" onClick={() => setShowSignup(false)}>
-        Retour
-      </button>
     </div>
   );
 }

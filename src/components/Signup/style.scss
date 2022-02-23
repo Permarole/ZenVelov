@@ -57,6 +57,13 @@ button {
   color: white;
 }
 
+.return {
+    background-color: transparent;
+    padding: 1em;
+    position: absolute;
+    left: 40px;
+}
+
 .btn-primary {
   background-color: #ea2b2b;
   height: 34px;
@@ -64,4 +71,15 @@ button {
   min-width: 100px;
   color: white;
   margin-top: 1em;
+}
+
+@media only screen and (max-width: 420px) {
+    .return {
+        background-color: transparent;
+        padding: 1em;
+        position: absolute;
+        left: 0;
+        top: -40px
+    }
+
 }
