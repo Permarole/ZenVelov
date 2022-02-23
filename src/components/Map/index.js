@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import Logout from "../Logout/Logout";
 import {
   getStationInformation,
   getStationStatus,
@@ -13,14 +14,18 @@ import {
   LayerGroup,
   Circle,
 } from "react-leaflet";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Map = () => {
   const RADIUS = 1500;
   const KEYRUS_COOR = [45.77872391853525, 4.859720853364637];
   const [refresh, setRefresh] = React.useState(false);
   const [relevantStations, setRelevantStations] = React.useState();
+  const { setShowProfil } = useAuth()
+  let timer = setTimeout(() => setRefresh(!refresh), 25000);
 
   React.useEffect(async () => {
+    console.log("refresh");
     // First we gather all the stations information to get the coordinates
     const stationsInfo = await getStationInformation();
     // Then the station status to get the current state of the stations
@@ -33,11 +38,19 @@ const Map = () => {
       KEYRUS_COOR
     );
     setRelevantStations(newRelevantStations);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [refresh]);
 
   return (
     <div>
-      <h2>Bienvenue sur ZenVelov</h2>
+      <h2 className="mapTitle">ZenVelov</h2>
+      <div className="nav">
+        <button className="profil-btn btn-primary" onClick={() => setShowProfil(true)}>Profil</button>
+        <Logout />
+      </div>
       <div id="map">
         <MapContainer center={KEYRUS_COOR} zoom={13}>
           <TileLayer
@@ -74,7 +87,6 @@ const Map = () => {
             })}
         </MapContainer>
       </div>
-      <button onClick={() => setRefresh(!refresh)}>Refresh</button>
     </div>
   );
 };

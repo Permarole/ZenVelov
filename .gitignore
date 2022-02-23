@@ -10,3 +10,5 @@ webpack-stats.json
 
 # Yarn.
 yarn-error.log
+
+.env.local
