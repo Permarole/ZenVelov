@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'promise-polyfill/src/polyfill'
-import App from './components/App'
+import TicketSidebarLayout from './components/TicketSidebarLayout'
 import './global.scss'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+
+
+ReactDOM.render(<TicketSidebarLayout />, document.getElementById('root'))
