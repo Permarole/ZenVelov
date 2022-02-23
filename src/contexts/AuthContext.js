@@ -5,6 +5,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateEmail,
+  updatePassword,
+  EmailAuthProvider,
 } from "firebase/auth";
 
 const AuthContext = React.createContext();
@@ -32,16 +35,23 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
-//   function resetPassword(email) {
-//     return auth.sendPasswordResetEmail(email);
-//   }
-
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
+  function getCredential(userProvidedPassword) {
+    return EmailAuthProvider.credential(
+      currentUser.email,
+      userProvidedPassword
+    );
   }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  //   function resetPassword(email) {
+  //     return auth.sendPasswordResetEmail(email);
+  //   }
+
+  function updateUserEmail(email) {
+    return updateEmail(currentUser, email);
+  }
+
+  function updateUserPassword(password) {
+    return updatePassword(currentUser, password);
   }
 
   useEffect(() => {
@@ -65,8 +75,9 @@ export function AuthProvider({ children }) {
     setShowSignup,
     showProfil,
     setShowProfil,
-    updateEmail,
-    updatePassword,
+    updateUserEmail,
+    updateUserPassword,
+    getCredential,
   };
 
   return (
