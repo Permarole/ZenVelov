@@ -2,12 +2,10 @@ import React from "react";
 import Logout from "../Logout/Logout";
 import { useAuth } from "../../contexts/AuthContext";
 import {
-  updateProfile,
   reauthenticateWithCredential,
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import { findNonSerializableValue } from "@reduxjs/toolkit";
 import "./style.scss";
 
 export default function Profil() {
@@ -17,8 +15,6 @@ export default function Profil() {
   const previousPasswordRef = React.useRef();
   const {
     setShowProfil,
-    updateUserEmail,
-    updateUserPassword,
     currentUser,
     getCredential,
   } = useAuth();
