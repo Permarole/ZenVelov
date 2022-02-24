@@ -9,6 +9,26 @@
   pointer-events: none;
 }
 
+#map {
+  margin: 0 1em 1em ;
+}
+
+.legends {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.legend {
+ margin-right: 10px;
+}
+
+.legendMarker {
+  width: 12px;
+  height: 20px;
+  margin-right: 5px;
+}
+
 .nav {
   margin-bottom: 2em;
   display: flex;
@@ -21,10 +41,21 @@ button {
   align-items: center;
 }
 
+.marker {
+  margin-left: -12px !important;
+  margin-top: -41px !important;
+}
+
 
 @media only screen and (max-width: 350px) {
   .nav {
     flex-direction: column;
     align-items: center;
+  }
+
+  .legends {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
