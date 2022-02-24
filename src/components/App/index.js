@@ -13,7 +13,7 @@ export default function App() {
   const { currentUser, showLogin, showSignup, showProfil } = useAuth();
 
   React.useEffect(async () => {
-    zafClient.invoke("resize", { height: "500px" });
+    zafClient.invoke("resize", { height: "600px" });
 
     const data = await zafClient.get("ticket.requester");
     const requester = data["ticket.requester"];
