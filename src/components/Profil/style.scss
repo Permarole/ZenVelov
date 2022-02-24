@@ -1,7 +1,28 @@
 .successAlert {
-    background-color: #dff8d7;
+  background-color: #dff8d7;
   color: #288420;
   border: solid 1px #288420;
   border-radius: 3px;
   padding: 0.5em 0;
+}
+
+h3 {
+  font-size: 18pt;
+  color: #505050;
+  font-weight: 500;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.returnProfil {
+    background-color: transparent;
+    height: 34px;
+    width: 100px;
+    margin-top: 1em;
 }
