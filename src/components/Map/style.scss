@@ -9,14 +9,16 @@
   pointer-events: none;
 }
 
-.mapTitle {
-  margin: 0 0.5em;
-}
-
 .nav {
   margin-bottom: 2em;
   display: flex;
   justify-content: space-around;
+}
+
+button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 

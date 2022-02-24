@@ -13,11 +13,7 @@ export default function Profil() {
   const passwordRef = React.useRef();
   const passwordConfirmRef = React.useRef();
   const previousPasswordRef = React.useRef();
-  const {
-    setShowProfil,
-    currentUser,
-    getCredential,
-  } = useAuth();
+  const { setShowProfil, currentUser, getCredential } = useAuth();
   const [error, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -43,7 +39,8 @@ export default function Profil() {
       if (passwordRef.current.value.length !== 0) {
         await updatePassword(currentUser, passwordRef.current.value);
       }
-      setSuccess("Modifcation du compte terminée")
+      setSuccess("Profil mis à jour");
+      passwordRef.current.value = "";
     } catch {
       setError("Modification de compte échouée");
     }
@@ -54,7 +51,7 @@ export default function Profil() {
   return (
     <div>
       <div className="nav">
-        <button className="btn-primary" onClick={() => setShowProfil(false)}>
+        <button className="returnProfil btn" onClick={() => setShowProfil(false)}>
           <svg
             width="24"
             height="24"
@@ -64,7 +61,7 @@ export default function Profil() {
           >
             <path
               d="M2 11L9 2V7C20.953 7 22.332 16.678 22 22C21.498 19.315 21.265 15 9 15V20L2 11Z"
-              stroke="white"
+              stroke="#ea2b2b"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -73,10 +70,15 @@ export default function Profil() {
         </button>
         <Logout />
       </div>
-      <h2>Profil</h2>
-      {error && <div className="errorAlert">{error}</div>}
-      {success && <div className="succesAlert">{success}</div>}
-      <form onSubmit={handleSubmit}>
+      <h3>Profil</h3>
+      {error && <div className="errorAlert alert">{error}</div>}
+      {success && <div className="successAlert alert">{success}</div>}
+      <img
+        className={loading ? "" : "hidden"}
+        src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"
+        alt=""
+      />
+      <form onSubmit={handleSubmit} className={loading ? "hidden" : ""}>
         <div id="email" className="inputContainer">
           <label>Email</label>
           <input
@@ -88,18 +90,26 @@ export default function Profil() {
         </div>
         <div id="password" className="inputContainer">
           <label>Nouveau Mot de passe</label>
-          <input type="password" ref={passwordRef} />
+          <input
+            type="password"
+            ref={passwordRef}
+            placeholder="Laisser vide pour ne pas changer"
+          />
         </div>
         <div id="password-confirm" className="inputContainer">
           <label>Confirmation Mot de passe</label>
-          <input type="password" ref={passwordConfirmRef} />
+          <input
+            type="password"
+            ref={passwordConfirmRef}
+            placeholder="Laisser vide pour ne pas changer"
+          />
         </div>
-        <div>
+        <p>
           Veuillez renseigner votre ancien mot de passe pour toutes
           modifications
-        </div>
+        </p>
         <div id="password-confirm" className="inputContainer">
-          <label>Mot de passe actuel</label>
+          {/* <label>Mot de passe actuel</label> */}
           <input type="password" ref={previousPasswordRef} required />
         </div>
         <button disabled={loading} type="submit" className="btn-primary">

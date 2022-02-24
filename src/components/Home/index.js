@@ -7,7 +7,6 @@ export default function Home() {
 
   return (
     <div className="home">
-      <h2>ZenVelov</h2>
       <p className="homeText">
         Bienvenue sur ZenVelov, l'application qui vous permettra de supprimer le
         motif "j'ai pas trouvé de Velo'v" de votre liste de justificatifs de

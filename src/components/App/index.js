@@ -22,6 +22,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <h2>ZenVelov</h2>
       {!showLogin && !showSignup && currentUser == null ? <Home /> : ""}
       {showSignup ? <Signup /> : ""}
       {showLogin ? <Login /> : ""}
