@@ -51,7 +51,10 @@ export default function Profil() {
   return (
     <div>
       <div className="nav">
-        <button className="returnProfil btn" onClick={() => setShowProfil(false)}>
+        <button
+          className="returnProfil btn"
+          onClick={() => setShowProfil(false)}
+        >
           <svg
             width="24"
             height="24"
@@ -104,12 +107,8 @@ export default function Profil() {
             placeholder="Laisser vide pour ne pas changer"
           />
         </div>
-        <p>
-          Veuillez renseigner votre ancien mot de passe pour toutes
-          modifications
-        </p>
-        <div id="password-confirm" className="inputContainer">
-          {/* <label>Mot de passe actuel</label> */}
+        <div id="current-password" className="inputContainer">
+          <label>Mot de passe actuel</label>
           <input type="password" ref={previousPasswordRef} required />
         </div>
         <button disabled={loading} type="submit" className="btn-primary">
