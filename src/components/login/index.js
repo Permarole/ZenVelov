@@ -1,13 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useAuth } from "../../contexts/AuthContext";
+import { navigateTo } from "../../features/router/routerSlice";
 import "./style.scss";
 
 export default function Login() {
   const emailRef = React.useRef();
   const passwordRef = React.useRef();
-  const { login, currentUser, setShowLogin } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,7 +20,7 @@ export default function Login() {
       // Prevent user from sending the form again
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      setShowLogin(false);
+      dispatch(navigateTo('map'))
     } catch {
       setError("Combinaison identifiant/mot de passe incorrecte");
     }
@@ -27,7 +30,7 @@ export default function Login() {
 
   return (
     <div className="loginContainer">
-      <button className="return" onClick={() => setShowLogin(false)}>
+      <button className="return" onClick={() => dispatch(navigateTo('home'))}>
         <svg
           width="24"
           height="24"
@@ -44,8 +47,8 @@ export default function Login() {
           />
         </svg>
       </button>
-      <h2 className="loginTitle">Connexion</h2>
-      {error && <div className="alert">{error}</div>}
+      <h3 className="loginTitle">Connexion</h3>
+      {error && <div className="errorAlert alert">{error}</div>}
       <form className="loginForm" onSubmit={handleSubmit}>
         <div className="inputContainer">
           <label htmlFor="eamil">Email :</label>
@@ -60,10 +63,13 @@ export default function Login() {
             id="password"
           />
         </div>
-        <button className="btn-primary" type="submit">
+        <button className="btn-primary submit" type="submit">
           Submit
         </button>
       </form>
+      <a href="" onClick={() => dispatch(navigateTo('resetPassword'))}>
+        Mot de passe oublié ?
+      </a>
     </div>
   );
 }
