@@ -9,8 +9,6 @@
   background-color: #f8d7da;
   color: #842029;
   border: solid 1px #842029;
-  border-radius: 3px;
-  padding: 0.5em 0;
 }
 
 .inputContainer {
@@ -25,6 +23,11 @@ form,
   width: 70%;
   margin: 1.125em auto;
   max-width: 350px;
+}
+
+.alert {
+  border-radius: 3px;
+  padding: 0.5em 1.125em;
 }
 
 h2 {
@@ -58,10 +61,10 @@ button {
 }
 
 .return {
-    background-color: transparent;
-    padding: 1em;
-    position: absolute;
-    left: 40px;
+  background-color: transparent;
+  padding: 1em;
+  position: absolute;
+  left: 40px;
 }
 
 .btn-primary {
@@ -74,12 +77,11 @@ button {
 }
 
 @media only screen and (max-width: 420px) {
-    .return {
-        background-color: transparent;
-        padding: 1em;
-        position: absolute;
-        left: 0;
-        top: -40px
-    }
-
+  .return {
+    background-color: transparent;
+    padding: 1em;
+    position: absolute;
+    left: 0;
+    top: -40px;
+  }
 }

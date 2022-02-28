@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useDispatch } from "react-redux";
 import { navigateTo } from "../../features/router/routerSlice";
+import "./style.scss";
 
 export default function ResetPassword() {
   const emailRef = React.useRef();
@@ -15,23 +16,22 @@ export default function ResetPassword() {
     e.preventDefault();
 
     try {
+      setError("");
       setSuccess("");
       // Prevent user from sending the form again
       await resetPassword(emailRef.current.value);
-      setSuccess("Verifier vos email pour reinitialiser votre mot de passe");
-    } catch {
+      setSuccess(
+        "Si cette adresse est associée à un compte, un email contenant la procédure de reinitialisation vous a été envoyé"
+      );
+    } catch (error) {
+      console.error(error);
       setError("Reinitialisation du mot de passe echouée");
     }
   }
 
   return (
     <div className="resetContainer">
-      <button
-        className="return"
-        onClick={() => {
-          dispatch(navigateTo('login'));
-        }}
-      >
+      <button className="return" onClick={() => dispatch(navigateTo("home"))}>
         <svg
           width="24"
           height="24"
@@ -48,9 +48,9 @@ export default function ResetPassword() {
           />
         </svg>
       </button>
-      <h2 className="resetTitle">Reinitialisation Mot de Passe</h2>
+      <h3 className="resetTitle">Reinitialisation Mot de Passe</h3>
       {error && <div className="errorAlert">{error}</div>}
-      {success && <div className="sucessAlert">{success}</div>}
+      {success && <div className="successAlert">{success}</div>}
       <form className="resetForm" onSubmit={handleSubmit}>
         <div className="inputContainer">
           <label htmlFor="eamil">Email :</label>
@@ -60,14 +60,14 @@ export default function ResetPassword() {
           Submit
         </button>
       </form>
-      <a
-        href=""
+      <button
+        className="anchor"
         onClick={() => {
-          dispatch(navigateTo('login'));
+          dispatch(navigateTo("login"));
         }}
       >
         Se connecter
-      </a>
+      </button>
     </div>
   );
 }

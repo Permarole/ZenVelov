@@ -6,8 +6,7 @@ import Map from "../Map";
 import Signup from "../Signup/Signup";
 import Profil from "../Profil";
 import Home from "../Home";
-import { useAuth } from "../../contexts/AuthContext";
-import ResetPassword from "../ResetPassword/ResetPassword";
+import ResetPassword from "../ResetPassword";
 import { useSelector } from "react-redux";
 
 export default function App() {

@@ -20,7 +20,7 @@ export default function Login() {
       // Prevent user from sending the form again
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      dispatch(navigateTo('map'))
+      dispatch(navigateTo("map"));
     } catch {
       setError("Combinaison identifiant/mot de passe incorrecte");
     }
@@ -30,7 +30,7 @@ export default function Login() {
 
   return (
     <div className="loginContainer">
-      <button className="return" onClick={() => dispatch(navigateTo('home'))}>
+      <button className="return" onClick={() => dispatch(navigateTo("home"))}>
         <svg
           width="24"
           height="24"
@@ -63,13 +63,16 @@ export default function Login() {
             id="password"
           />
         </div>
-        <button className="btn-primary submit" type="submit">
+        <button disable={loading.toString()} className="btn-primary submit" type="submit">
           Submit
         </button>
       </form>
-      <a href="" onClick={() => dispatch(navigateTo('resetPassword'))}>
+      <button
+        className="anchor"
+        onClick={() => dispatch(navigateTo("resetPassword"))}
+      >
         Mot de passe oublié ?
-      </a>
+      </button>
     </div>
   );
 }

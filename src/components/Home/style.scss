@@ -1,4 +1,3 @@
-
 .log {
   display: flex;
   justify-content: space-around;
@@ -13,6 +12,8 @@
 
 .homeText {
   margin: 1em auto 3em;
+  padding: 0.5em 1.125em;
+  max-width: 70%;
 }
 
 @media only screen and (max-width: 350px) {

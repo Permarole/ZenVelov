@@ -16,8 +16,12 @@ input {
   width: 100%;
 }
 
-a {
+.anchor {
+  background-color: transparent;
+  border: none;
   color: #ea2b2b;
+  text-decoration: underline;
+  margin: 0 auto;
 }
 
 .loginContainer {

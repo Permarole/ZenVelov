@@ -31,6 +31,7 @@ export default function Profil() {
 
     try {
       setError("");
+      setSuccess("");
       setLoading(true);
 
       await reauthenticateWithCredential(currentUser, credential);
