@@ -3,12 +3,15 @@ import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   onAuthStateChanged,
   signOut,
   updateEmail,
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { navigateTo } from "../features/router/routerSlice";
 
 const AuthContext = React.createContext();
 
@@ -17,11 +20,9 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showProfil, setShowProfil] = useState(false);
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -32,6 +33,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    dispatch(navigateTo("home"));
     return signOut(auth);
   }
 
@@ -42,9 +44,9 @@ export function AuthProvider({ children }) {
     );
   }
 
-  //   function resetPassword(email) {
-  //     return auth.sendPasswordResetEmail(email);
-  //   }
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
 
   function updateUserEmail(email) {
     return updateEmail(currentUser, email);
@@ -68,13 +70,7 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
-    // resetPassword,
-    showLogin,
-    setShowLogin,
-    showSignup,
-    setShowSignup,
-    showProfil,
-    setShowProfil,
+    resetPassword,
     updateUserEmail,
     updateUserPassword,
     getCredential,

@@ -7,6 +7,8 @@ import {
   updatePassword,
 } from "firebase/auth";
 import "./style.scss";
+import { useDispatch } from "react-redux";
+import { navigateTo } from "../../features/router/routerSlice";
 
 export default function Profil() {
   const emailRef = React.useRef();
@@ -17,6 +19,7 @@ export default function Profil() {
   const [error, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,6 +31,7 @@ export default function Profil() {
 
     try {
       setError("");
+      setSuccess("");
       setLoading(true);
 
       await reauthenticateWithCredential(currentUser, credential);
@@ -53,7 +57,7 @@ export default function Profil() {
       <div className="nav">
         <button
           className="returnProfil btn"
-          onClick={() => setShowProfil(false)}
+          onClick={() => dispatch(navigateTo("map"))}
         >
           <svg
             width="24"
@@ -111,7 +115,7 @@ export default function Profil() {
           <label>Mot de passe actuel</label>
           <input type="password" ref={previousPasswordRef} required />
         </div>
-        <button disabled={loading} type="submit" className="btn-primary">
+        <button disabled={loading} type="submit" className="btn-primary submit">
           Modifier
         </button>
       </form>

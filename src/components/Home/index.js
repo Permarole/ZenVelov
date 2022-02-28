@@ -1,9 +1,14 @@
 import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import "./style.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { navigateTo } from "../../features/router/routerSlice";
 
 export default function Home() {
   const { setShowLogin, setShowSignup } = useAuth();
+  const route = useSelector(state => state.router.value);
+  const dispatch = useDispatch();
+  
 
   return (
     <div className="home">
@@ -15,13 +20,13 @@ export default function Home() {
       <div className="log">
         <button
           className="loginBtn btn-primary"
-          onClick={() => setShowLogin(true)}
+          onClick={() =>  dispatch(navigateTo('login'))}
         >
           Se connecter
         </button>
         <button
           className="signupBtn btn-secondary"
-          onClick={() => setShowSignup(true)}
+          onClick={() => dispatch(navigateTo('signup'))}
         >
           Creer un compte
         </button>

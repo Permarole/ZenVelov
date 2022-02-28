@@ -16,13 +16,15 @@ import {
   Circle,
 } from "react-leaflet";
 import { useAuth } from "../../contexts/AuthContext";
+import { navigateTo } from "../../features/router/routerSlice";
+import { useDispatch } from "react-redux";
 
 const Map = () => {
   const RADIUS = 1500;
   const KEYRUS_COOR = [45.77872391853525, 4.859720853364637];
   const [refresh, setRefresh] = React.useState(false);
   const [relevantStations, setRelevantStations] = React.useState();
-  const { setShowProfil } = useAuth();
+  const dispatch = useDispatch();
   let timer = setTimeout(() => setRefresh(!refresh), 25000);
 
   React.useEffect(async () => {
@@ -49,7 +51,7 @@ const Map = () => {
       <div className="nav">
         <button
           className="profil-btn btn-primary"
-          onClick={() => setShowProfil(true)}
+          onClick={() => dispatch(navigateTo("profil"))}
         >
           <div> Profil </div>
           <svg

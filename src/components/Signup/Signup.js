@@ -2,6 +2,8 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import Login from "../Login";
 import "./style.scss";
+import { navigateTo } from "../../features/router/routerSlice";
+import { useDispatch } from "react-redux";
 
 export default function Signup() {
   const emailRef = React.useRef();
@@ -10,6 +12,7 @@ export default function Signup() {
   const { signup, setShowSignup, login } = useAuth();
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,7 +25,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      setShowSignup(false);
+      dispatch(navigateTo('map'))
       await login(emailRef.current.value, passwordRef.current.value);
     } catch (error) {
       setError("Création de compte échouée");
@@ -33,7 +36,7 @@ export default function Signup() {
 
   return (
     <div className="signup">
-      <button className="return" onClick={() => setShowSignup(false)}>
+      <button className="return" onClick={() => dispatch(navigateTo('home'))}>
         <svg
           width="24"
           height="24"
@@ -50,7 +53,7 @@ export default function Signup() {
           />
         </svg>
       </button>
-      <h2>Sign Up</h2>
+      <h3>Sign Up</h3>
       {error && <div className="alert">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div id="email" className="inputContainer">
@@ -65,7 +68,7 @@ export default function Signup() {
           <label>Password Confirmation</label>
           <input type="password" ref={passwordConfirmRef} required />
         </div>
-        <button disabled={loading} type="submit" className="btn-primary">
+        <button disabled={loading} type="submit" className="btn-primary submit">
           Sign Up
         </button>
       </form>

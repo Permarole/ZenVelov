@@ -3,13 +3,16 @@
   color: #288420;
   border: solid 1px #288420;
   border-radius: 3px;
-  padding: 0.5em 0;
+  padding: 0.5em 1.125em;
 }
 
 h3 {
   font-size: 18pt;
   color: #505050;
   font-weight: 500;
+  max-width: 215px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 button:hover {
@@ -17,12 +20,12 @@ button:hover {
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .returnProfil {
-    background-color: transparent;
-    height: 34px;
-    width: 100px;
-    margin-top: 1em;
+  background-color: transparent;
+  height: 34px;
+  width: 100px;
+  margin-top: 1em;
 }

@@ -1,40 +1,45 @@
 .inputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
 }
 
-.loginForm {
-    width: 70%;
-    margin: 1.125em auto;
-    max-width: 350px;
+.submit {
+  margin: 0 auto;
 }
-
 
 input {
-    background-color: #EDEDED;
-    height: 40px;
-    padding-left: 20px;
-    width: 100%;
+  background-color: #ededed;
+  height: 40px;
+  padding-left: 20px;
+  width: 100%;
+}
 
+.anchor {
+  background-color: transparent;
+  border: none;
+  color: #ea2b2b;
+  text-decoration: underline;
+  margin: 0 auto;
 }
 
 .loginContainer {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-label {
-    width: 100%;
-    text-align: left;
-    display: inline;
-    margin-bottom: 0.5em;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
 }
 
-input, button {
-    border: none;
-    border-radius: 3px;
+label {
+  width: 100%;
+  text-align: left;
+  display: inline;
+  margin-bottom: 0.5em;
+}
+
+input,
+button {
+  border: none;
+  border-radius: 3px;
 }

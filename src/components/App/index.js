@@ -6,11 +6,12 @@ import Map from "../Map";
 import Signup from "../Signup/Signup";
 import Profil from "../Profil";
 import Home from "../Home";
-import { useAuth } from "../../contexts/AuthContext";
+import ResetPassword from "../ResetPassword";
+import { useSelector } from "react-redux";
 
 export default function App() {
   const [requester, setRequester] = React.useState(null);
-  const { currentUser, showLogin, showSignup, showProfil } = useAuth();
+  const route = useSelector((state) => state.router.value);
 
   React.useEffect(async () => {
     zafClient.invoke("resize", { height: "600px" });
@@ -23,11 +24,12 @@ export default function App() {
   return (
     <div className="App">
       <h2>ZenVelov</h2>
-      {!showLogin && !showSignup && currentUser == null ? <Home /> : ""}
-      {showSignup ? <Signup /> : ""}
-      {showLogin ? <Login /> : ""}
-      {currentUser && !showProfil ? <Map /> : ""}
-      {currentUser && showProfil ? <Profil /> : ""}
+      {route == 'home' ? <Home /> : ""}
+      {route == "login" ? <Login /> : ""}
+      {route == "signup" ? <Signup /> : ""}
+      {route == "resetPassword" ? <ResetPassword /> : ""}
+      {route == "map" ? <Map /> : ""}
+      {route == "profil" ? <Profil /> : ""}
     </div>
   );
 }
