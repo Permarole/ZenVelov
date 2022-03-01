@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import Login from "../Login";
 import "./style.scss";
 import { navigateTo } from "../../features/router/routerSlice";
 import { useDispatch } from "react-redux";
@@ -10,7 +9,7 @@ export default function Signup() {
   const emailRef = React.useRef();
   const passwordRef = React.useRef();
   const passwordConfirmRef = React.useRef();
-  const { signup, setShowSignup, login } = useAuth();
+  const { signup, login } = useAuth();
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ export default function Signup() {
         </svg>
       </button>
       <h3>Sign Up</h3>
-      {error && <div className="alert">{error}</div>}
+      {error && <div className="errorAlert alert">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div id="email" className="inputContainer">
           <label>Email</label>

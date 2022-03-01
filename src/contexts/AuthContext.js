@@ -10,8 +10,6 @@ import {
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { navigateTo } from "../features/router/routerSlice";
 
 const AuthContext = React.createContext();
 
@@ -20,7 +18,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +30,6 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    dispatch(navigateTo("home"));
     return signOut(auth);
   }
 

@@ -15,7 +15,7 @@ export default function Profil() {
   const passwordRef = React.useRef();
   const passwordConfirmRef = React.useRef();
   const previousPasswordRef = React.useRef();
-  const { setShowProfil, currentUser, getCredential } = useAuth();
+  const { currentUser, getCredential } = useAuth();
   const [error, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
   const [loading, setLoading] = React.useState(false);

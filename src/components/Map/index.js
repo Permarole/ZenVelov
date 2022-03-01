@@ -15,7 +15,6 @@ import {
   LayerGroup,
   Circle,
 } from "react-leaflet";
-import { useAuth } from "../../contexts/AuthContext";
 import { navigateTo } from "../../features/router/routerSlice";
 import { useDispatch } from "react-redux";
 
@@ -46,7 +45,6 @@ const Map = () => {
     }
     return () => {
       clearTimeout(timer);
-      setRefresh(false);
     };
   }, [refresh]);
 

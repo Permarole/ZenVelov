@@ -24,7 +24,6 @@ export default function ResetPassword() {
         "Si cette adresse est associée à un compte, un email contenant la procédure de reinitialisation vous a été envoyé"
       );
     } catch (error) {
-      console.error(error);
       setError("Reinitialisation du mot de passe echouée");
     }
   }
@@ -49,7 +48,7 @@ export default function ResetPassword() {
         </svg>
       </button>
       <h3 className="resetTitle">Reinitialisation Mot de Passe</h3>
-      {error && <div className="errorAlert">{error}</div>}
+      {error && <div className="errorAlert alert">{error}</div>}
       {success && <div className="successAlert">{success}</div>}
       <form className="resetForm" onSubmit={handleSubmit}>
         <div className="inputContainer">

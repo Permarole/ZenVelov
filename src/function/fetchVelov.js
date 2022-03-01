@@ -22,10 +22,6 @@ export function getRelevantStations (stationsInfo, stationsStatus, RADIUS, KEYRU
         for(let status of stationsStatus){
             if (status.station_id === station.station_id){
                 relevantStations.push({...station, ...status }) 
-                // let velovMarker = L.marker([station.lat, station.lon]).addTo(map);
-                // {station.address ?
-                // velovMarker.bindPopup( `<b> ${station.address} <hr>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)
-                // : velovMarker.bindPopup(`<b>Vélo(s) disponible(s):  ${status.num_bikes_available} <hr> Dock(s) disponible(s): ${status.num_docks_available}`)};
                 break;
             }
         }   
