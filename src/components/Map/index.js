@@ -29,23 +29,24 @@ const Map = () => {
 
   React.useEffect(async () => {
     if (mounted) {
-      
-      // First we gather all the stations information to get the coordinates
-      const stationsInfo = await getStationInformation();
-      // Then the station status to get the current state of the stations
-      const stationsStatus = await getStationStatus();
-      // Finaly we map both info to handle only relevant stations
-      const newRelevantStations = getRelevantStations(
-        stationsInfo,
-        stationsStatus,
-        RADIUS,
-        KEYRUS_COOR
-      );
-      setRelevantStations(newRelevantStations);
+      try {
+        // First we gather all the stations information to get the coordinates
+        const stationsInfo = await getStationInformation();
+        // Then the station status to get the current state of the stations
+        const stationsStatus = await getStationStatus();
+        // Finaly we map both info to handle only relevant stations
+        const newRelevantStations = getRelevantStations(
+          stationsInfo,
+          stationsStatus,
+          RADIUS,
+          KEYRUS_COOR
+        );
+        setRelevantStations(newRelevantStations);
+      } catch {}
+      return () => {
+        clearTimeout(timer);
+      };
     }
-    return () => {
-      clearTimeout(timer);
-    };
   }, [refresh]);
 
   React.useEffect(() => {
