@@ -31,7 +31,6 @@ const Map = () => {
   React.useEffect(async () => {
     if (mounted) {
       
-      console.log("ok");
       // First we gather all the stations information to get the coordinates
       const stationsInfo = await getStationInformation();
       // Then the station status to get the current state of the stations
