@@ -5,6 +5,7 @@ import { navigateTo } from "../../features/router/routerSlice";
 import "./style.scss";
 
 export default function Login() {
+  let mounted = true;
   const emailRef = React.useRef();
   const passwordRef = React.useRef();
   const { login } = useAuth();
@@ -15,18 +16,27 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      setError("");
-      // Prevent user from sending the form again
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      dispatch(navigateTo("map"));
-    } catch {
-      setError("Combinaison identifiant/mot de passe incorrecte");
-    }
+    if(mounted){
 
-    setLoading(false);
+      try {
+        setError("");
+        // Prevent user from sending the form again
+        setLoading(true);
+        await login(emailRef.current.value, passwordRef.current.value);
+        dispatch(navigateTo("map"));
+      } catch {
+        setError("Combinaison identifiant/mot de passe incorrecte");
+      }
+      
+      setLoading(false);
+    }
   }
+
+  React.useEffect(() => {
+    return () => {
+      mounted = false
+    };
+  })
 
   return (
     <div className="loginContainer">

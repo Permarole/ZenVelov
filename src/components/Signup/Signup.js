@@ -6,6 +6,7 @@ import { navigateTo } from "../../features/router/routerSlice";
 import { useDispatch } from "react-redux";
 
 export default function Signup() {
+  let mounted = true;
   const emailRef = React.useRef();
   const passwordRef = React.useRef();
   const passwordConfirmRef = React.useRef();
@@ -17,26 +18,34 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Les mots de passe ne correspondent pas");
-    }
+    if (mounted) {
+      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        return setError("Les mots de passe ne correspondent pas");
+      }
 
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      dispatch(navigateTo('map'))
-      await login(emailRef.current.value, passwordRef.current.value);
-    } catch (error) {
-      setError("Création de compte échouée");
-    }
+      try {
+        setError("");
+        setLoading(true);
+        await signup(emailRef.current.value, passwordRef.current.value);
+        dispatch(navigateTo("map"));
+        await login(emailRef.current.value, passwordRef.current.value);
+      } catch (error) {
+        setError("Création de compte échouée");
+      }
 
-    setLoading(false);
+      setLoading(false);
+    }
   }
+
+  React.useEffect(() => {
+    return () => {
+      mounted = false;
+    };
+  });
 
   return (
     <div className="signup">
-      <button className="return" onClick={() => dispatch(navigateTo('home'))}>
+      <button className="return" onClick={() => dispatch(navigateTo("home"))}>
         <svg
           width="24"
           height="24"

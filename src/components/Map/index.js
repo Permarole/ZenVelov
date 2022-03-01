@@ -20,31 +20,42 @@ import { navigateTo } from "../../features/router/routerSlice";
 import { useDispatch } from "react-redux";
 
 const Map = () => {
+  let mounted = true;
   const RADIUS = 1500;
   const KEYRUS_COOR = [45.77872391853525, 4.859720853364637];
-  const [refresh, setRefresh] = React.useState(false);
+  const timer = setTimeout(() => setRefresh(!refresh), 25000);
   const [relevantStations, setRelevantStations] = React.useState();
+  const [refresh, setRefresh] = React.useState(false);
   const dispatch = useDispatch();
-  let timer = setTimeout(() => setRefresh(!refresh), 25000);
 
   React.useEffect(async () => {
-    // First we gather all the stations information to get the coordinates
-    const stationsInfo = await getStationInformation();
-    // Then the station status to get the current state of the stations
-    const stationsStatus = await getStationStatus();
-    // Finaly we map both info to handle only relevant stations
-    const newRelevantStations = getRelevantStations(
-      stationsInfo,
-      stationsStatus,
-      RADIUS,
-      KEYRUS_COOR
-    );
-    setRelevantStations(newRelevantStations);
-
+    if (mounted) {
+      
+      console.log("ok");
+      // First we gather all the stations information to get the coordinates
+      const stationsInfo = await getStationInformation();
+      // Then the station status to get the current state of the stations
+      const stationsStatus = await getStationStatus();
+      // Finaly we map both info to handle only relevant stations
+      const newRelevantStations = getRelevantStations(
+        stationsInfo,
+        stationsStatus,
+        RADIUS,
+        KEYRUS_COOR
+      );
+      setRelevantStations(newRelevantStations);
+    }
     return () => {
       clearTimeout(timer);
+      setRefresh(false);
     };
   }, [refresh]);
+
+  React.useEffect(() => {
+    return () => {
+      mounted = false;
+    };
+  });
 
   return (
     <div>
