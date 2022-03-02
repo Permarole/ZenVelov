@@ -81,7 +81,7 @@ export default function Profil() {
       {error && <div className="errorAlert alert">{error}</div>}
       {success && <div className="successAlert alert">{success}</div>}
       <img
-        className={loading ? "" : "hidden"}
+        className={loading ? "load" : "hidden"}
         src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"
         alt=""
       />
